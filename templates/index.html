@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Lens Search Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 20px;
+        }
+        h2 {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            margin: 0 auto;
+        }
+        p {
+            margin: 10px 0;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <h1>Google Lens Search Results</h1>
+
+    <h2>Visual Matches:</h2>
+    <ul>
+        {% for match in results.visual_matches %}
+            <li>
+                <img src="{{ match.thumbnail }}" alt="Thumbnail">
+                <p>Product: {{match.title}}</p>
+               {% if 'price' in match %}
+                    <p>Price:{{match.price.value}}</p>
+
+                {% endif %}
+                <p>{{match.source}}: <a href="{{ match.link }}">{{ match.link }}</a></p>
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
