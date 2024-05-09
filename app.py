@@ -7,7 +7,7 @@ app = Flask(__name__)
 def index():
     # Perform the Google Lens search
     params = {
-      "api_key": "YOUR API KEY",
+      "api_key": "21ead71b458d051c367a569ed84627ed80300e1a006d88582330eaacf8c48c99",
       "engine": "google_lens",
       "url": "https://www.decornation.in/wp-content/uploads/2020/07/modern-dining-table-chairs-800x800.jpg",
              "country": "in"
