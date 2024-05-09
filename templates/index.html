@@ -3,124 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="referrer" content="no-referrer">
     <title>Google Lens Search Results</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
         }
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-        }
-        .big-card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            margin-bottom: 20px;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-        }
-        .big-card img {
-            max-width: 100%;
-            max-height: 300px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            align-self: center;
-        }
-        .big-card-content {
-            padding: 20px;
-            flex-grow: 1;
-        }
-        .big-card-title {
-            font-size: 18px;
-            font-weight: bold;
-            margin-bottom: 10px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        h1 {
             text-align: center;
-            padding: 15px;
+            margin-top: 20px;
         }
-        .small-card {
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        h2 {
+            margin-top: 20px;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
             margin-bottom: 20px;
-            width: calc(25% - 20px);
-            display: flex;
-            flex-direction: column;
-        }
-        .small-card img {
-            width: 100%;
-            height: 150px; /* Set thumbnail image height */
-            object-fit: cover; /* Ensure the aspect ratio is maintained */
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
-        .small-card-content {
+            border: 1px solid #ccc;
             padding: 10px;
-            flex-grow: 1;
         }
-        .small-card-title {
-            font-size: 14px;
-            font-weight: bold;
-            margin-bottom: 5px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-        .small-card-link {
-            font-size: 12px;
-            color: #007bff;
-            margin-bottom: 5px;
-            text-decoration: none;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        img {
+            max-width: 100%;
+            height: auto;
             display: block;
+            margin: 0 auto;
         }
-        .small-card-link:hover {
+        p {
+            margin: 10px 0;
+        }
+        a {
+            color: blue;
+            text-decoration: none;
+        }
+        a:hover {
             text-decoration: underline;
-        }
-        .small-card-price {
-            font-size: 12px;
-            color: #666666;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="big-card">
-            <div class="big-card-title">Showing Results For Your Search</div>
-            <img src="{{ path }}" alt="Uploaded Image">
-            <div class="big-card-content">
-            </div>
-        </div>
+    <h1>Google Lens Search Results</h1>
 
+    <h2>Visual Matches:</h2>
+    <ul>
         {% for match in results.visual_matches %}
-        <div class="small-card">
-            <img src="{{ match.thumbnail }}" alt="Thumbnail">
-            <div class="small-card-content">
-                <div class="small-card-title">{{ match.title }}</div>
-                <a href="{{ match.link }}" class="small-card-link">{{ match.link }}</a>
-                {% if 'price' in match and match.price %}
-                <div class="small-card-price">Price: {{ match.price.value }}</div>
+            <li>
+                <img src="{{ match.thumbnail }}" alt="Thumbnail">
+                <p>Product: {{match.title}}</p>
+               {% if 'price' in match %}
+                    <p>Price:{{match.price.value}}</p>
+
                 {% endif %}
-            </div>
-        </div>
+                <p>{{match.source}}: <a href="{{ match.link }}">{{ match.link }}</a></p>
+            </li>
         {% endfor %}
-    </div>
+    </ul>
 </body>
 </html>
